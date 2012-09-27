@@ -55,17 +55,7 @@
 	<script>
 		$(document).ready(function() {
 			$("#username").focus();
-			$('.fancybox').fancybox({
-					openEffect : 'none',
-					closeEffect : 'none',
-					prevEffect : 'none',
-					nextEffect : 'none',
-
-					arrows : false,
-					helpers : {
-						media : {},
-						buttons : {}
-					});
+			$('.fancybox').fancybox();
 		});
 	</script>
 </head>
