@@ -25,7 +25,7 @@
 
 	if ($_POST["username"] != "") {
 		if (($_POST["username"] == $USERNAME) & ($_POST["password"] == $PASSWORD)) {
-			$_SESSION["username"] = "bc";
+			$_SESSION["username"] = $USERNAME;
 		} else {
 			$msg = "<div style='color: #f0f0'>wrong username or password!</div>";
 		}
@@ -57,8 +57,8 @@
 	<link rel="stylesheet" href="./fancy/jquery.fancybox.css?v=2.1.0" media="screen" />
 	<link rel="stylesheet" href="./fancy/helpers/jquery.fancybox-buttons.css?v=1.0.3" />
 	<link rel="stylesheet" href="./fancy/helpers/jquery.fancybox-thumbs.css?v=1.0.6" />
-	<link rel="stylesheet" href="./fancy/themes/base/jquery.ui.all.css">
-
+	<link rel="stylesheet" href="./fancy/themes/ui-lightness/jquery.ui.all.css">
+	<link rel="stylesheet" href="./fancy/default.css">
 	<script src="./fancy/jquery-1.8.0.min.js"></script>
 	<script src="./fancy/jquery.mousewheel-3.0.6.pack.js"></script>
 	<script src="./fancy/jquery.fancybox.js?v=2.1.0"></script>
@@ -68,27 +68,7 @@
 	<script src="./fancy/ui/jquery.ui.core.js"></script>
 	<script src="./fancy/ui/jquery.ui.widget.js"></script>
 	<script src="./fancy/ui/jquery.ui.datepicker.js"></script>
-
-	<style type="text/css">
-	<!--
-		.lst { width: 205px; height: 160px; margin: 5px; padding: 5px; float: left; display: inline-block; background-size: cover;  color: #333; font-size: 10pt; text-decoration: none; font-family: arial; font-weight: bold }
-		body { background-color: #333 }
-		#images { width: 100%; height: 90%; overflow: auto }
-	//-->
-	</style>
-	<script>
-		$(document).ready(function() {
-			$("#username").focus();
-			$('.fancybox').fancybox();
-			$('#datepicker').datepicker({"dateFormat": "dd.mm.yy"});
-			$('#dtform').submit(function(e) {
-				e.preventDefault();
-				$.post(".", $("#dtform").serialize(), function(data) {
-					$("#images").html(data);
-				});
-			});
-		});
-	</script>
+	<script src="./fancy/main.js"></script>
 </head>
 
 <body>
