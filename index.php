@@ -3,9 +3,11 @@
 	$PASSWORD = "123456";
 
 	session_start(); 
-	if ($_GET["cmd"] == "logout") $_SESSION["username"] = ""; 
+	$cmd = $_GET["cmd"];
+
+	if ($cmd == "logout") $_SESSION["username"] = ""; 
 	$msg = "";
-	
+
 	$year = date("Y"); 
 	$month = date("m");
 	$day = date("d");
@@ -33,7 +35,22 @@
 
 	$username = $_SESSION["username"];
 
-	if ($username == "") {
+	if ($cmd == "delete") {
+		if ($username == "") {
+			echo "nosession";		
+		} else {
+			$file = $_GET["image"];
+			$file = str_replace("/", "", $file);
+			$file = str_replace("..", "", $file);
+			$file = str_replace("*", "", $file);
+			if (copy($file, "./deleted/$file")) {
+				unlink($file);
+				echo "ok";
+			} else {
+				echo "error";
+			}
+		}
+	} else if ($username == "") {
 		pageheader();
 		login();
 		footer();	
@@ -90,7 +107,6 @@
 	<form method="post" style="margin: 0; padding: 0" id="dtform">
 		<input type="text" id="datepicker" name="date" id="date" value="<?php echo $dmy; ?>" size="10" maxlength="10" />
 		<input type="hidden" name="datesubmit" id="datesubmit" value="yes" />
-		<input type="submit" value="Show" />
 		<input type="button" value="Log Out"style="color: #f00" onclick="document.location.href='?cmd=logout'" />
 	</form>
 </div>
@@ -111,7 +127,7 @@ function images($ymd) {
 					$tarih = substr($filename, 24, 12);
 					//2012092216
 					$tarih = substr($tarih, 8, 2) . ":" . substr($tarih, 10, 2);
-					echo "<a href='$file' class='fancybox'><div class='lst' style='background-image:url(\"$file\")'>$tarih</div></a>";
+					echo "<div class='lst' style='background-image:url(\"$file\")'><a href='$file' class='fancybox'>$tarih</a><div class='del'><img class='ico' src='./fancy/delete.png' /></div></div>";
 				}
 			}
 		}
